@@ -7,6 +7,7 @@ import {EffectComposer} from 'three/examples/jsm/postprocessing/EffectComposer';
 import { TextureLoader } from 'three';
 import { GUI } from 'dat.gui'
 
+// Dat.GUI import. Seems like I gotta do this every time. Really annoying.
 //npm install dat.gui --save-dev
 //npm install @types/dat.gui --save-dev
 
