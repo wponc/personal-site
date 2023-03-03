@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <title>Shine</title>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="#first">objectives</a></li>
+      <li><a href="#second">experience</a></li>
+      <li><a href="#third">personal</a></li>
+      <li><a href="#fourth">credits</a></li>
+    </ul>
+  </nav>
+  <div class="welc"><h1>welcome</h1>
+    <p style="margin-left: 40px;">I'm Will, and this is my personal site.</div>
+  </div>
+  <section class="section" id="first"><h2>career objectives</h2>
+    <p> Most importantly, I’m excited at the opportunity to utilize high powered computational tools to benefit the environment 
+      in any way possible. Frequently this involves geographic information systems to analyze satellite and aerial imagery. 
+      In my career, I aim to combine UAV photogrammetry with machine learning models to automate environmental assessement
+      and protection protocols. I hope to apply these methods in the growing fields of precision turfgrass management and precision forestry. 
+      Take a look below at some of my recent work experience below. </p>
+  </section>
+  
+  <section class="section" id="second"><h2>work experience</h2>
+    <h3>Virginia Tech SPES</h3>
+    <p>Since May 2022, I’ve had the awesome opportunity to work as a research assistant in the Virginia Tech Turfgrass Pathology Lab. 
+      Primarily, this lab explores novel opportunities for applying modern technologies to traditional turfgrass practices. I’ve been 
+      exposed to research into nematode sampling, surface uniformity testing, and other methods aimed at improving player experience
+      on golf courses and athletic facilities alike. Currently my coworkers and I are conducting post-emerge herbicide trials, 
+      investigating the viability of blue gramma as a low-maintenance choice for lawns in the transition zone. A research poster 
+      for some of this work is available <a href="https://github.com/wponc/SDS-Disease-Map-Research/blob/main/Poncy_Final_ASA_Poster.pdf" target="_blank" rel="noopener noreferrer" id="ext">here</a>.</p>
+    <h3>SKTWorks LLC</h3>
+    <p>In September 2021 I was very fortunate to be brought on as an intern fieldwork assistant at a family-owned land conservation firm. 
+      Since then I’ve been able to travel extensively throughout the state of Virginia, conducting site visits to assess land protection 
+      practices in the establishment of conservation easements. Much of this experience has involved collection of aerial imagery with UAVs, 
+      creation of detailed photopoint information in ArcGIS Field Maps, and contribution to baseline documentation reports.</p>
+      <p>A link to my plaintext resume can be found <a href="https://github.com/wponc/Resume/blob/main/Winter23Resume.pdf" target="_blank" rel="noopener noreferrer" id="ext">here</a>.</p>
+  </section>
+  
+  <section class="section" id="third"><h2>about me</h2>
+    <p>haloes! haleskarth! I'm an FAA-licensed remote pilot pursuing a degree in environmental data science, slowly getting familiar with web design. 
+      When i'm not pretending to be busy in front of a computer or flying a drone, I enjoy forest walks and weightlifting. Dogs are my favorite animal,
+      and pineapple belongs on pizza.</p>
+    <div class="gallery">
+      <img src="/images/4.jpg">
+      <img src="/images/11.jpg">
+      <img src="/images/3.jpg">
+    </div>
+  </section>
+ 
+  <section class="section" id="fourth"><h2>acknowledgements</h2>
+    <p>This page was written with <a href="https://threejs.org/" target="_blank" rel="noopener noreferrer" id="ext">Three.js</a>, HTML and CSS. Many thanks to the Sketchfab creators
+    of the <a href="https://sketchfab.com/3d-models/man-base-mesh-5928fd95857f4bb498d5ea3b9876b945" target="_blank" rel="noopener noreferrer" id="ext">human</a>,  
+    <a href="https://sketchfab.com/3d-models/drone-mavic-2-pro-modified-e9d602b1d6aa4a998cebdc3bc8788488" target="_blank" rel="noopener noreferrer" id="ext">drone</a>, and
+    <a href="https://sketchfab.com/3d-models/fat-tree-fd659920d54a48a292358f3cfc812464" target="_blank" rel="noopener noreferrer" id="ext">tree</a> 3D models.
+    This site was the product of YouTube tutorials and lunch breaks. Coffee helped too.  
+  </p> 
+  </section>
+  
+  <script id="vertexShader" type="x-shader/x-vertex">
+    uniform float u_time;
+    void main() {
+      vec4 result;
+      result = vec4(position.x, position.y, position.z, 1.0);
+      gl_Position = (projectionMatrix * modelViewMatrix * result)*.25;
+    }
+  </script>
+  
+  <script id="fragmentShader" type="fragment">
+    uniform float u_time;
+    void main(){
+      gl_FragColor = vec4(.1,sin(u_time *.5)*.2,cos(u_time *.5)*.2,.6);
+    }
+  </script>
+  <canvas id="bg"></canvas>
+  <script type="module" src="/main.js"></script>
+</body>
+</html>

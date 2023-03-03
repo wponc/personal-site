@@ -1,0 +1,164 @@
+canvas {
+  position: fixed;
+  top:0;
+  left:0;
+  color:transparent;
+  z-index:-99;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width:50%;
+  overflow: overlay;
+}
+
+nav{
+  position: sticky;
+  top: 0;
+  padding-left: 10px;
+  z-index: 99;
+}
+ul{
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  box-sizing: border-box;
+  padding: 20px;
+}
+li {
+  list-style: none;
+  margin-right: 20px;
+  font-size: 25px;
+  font-weight: bold
+}
+a{
+  text-decoration: none;
+  font-family: 'Open-Sans', sans-serif;
+  background-image: url(https://64.media.tumblr.com/5d7ab997c9daa879a320f9ef21e895b7/tumblr_ooeddrvOJE1uzwgsuo1_400.gif);
+  text-transform: none;
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 17pt;
+  font-weight: bold;
+  transition: all .5s ease 0s;
+}
+a:hover{
+  background-image: url(https://t3.ftcdn.net/jpg/01/91/95/30/360_F_191953033_gehQATeDoh5z6PyRDbeKyBZuS83CjMEF.jpg);
+}
+
+
+.welc{
+  height: 100vh;
+  user-select:none;
+  animation: fadeIn 5s;
+}
+h1{
+  font-family: 'Open-Sans', sans-serif;
+  background-image: url(https://64.media.tumblr.com/5d7ab997c9daa879a320f9ef21e895b7/tumblr_ooeddrvOJE1uzwgsuo1_400.gif);
+  text-transform: none;
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size:96pt;
+  text-align:left;
+  padding-left: 30px;
+  padding-top: 50px;
+}
+.section {
+  padding-left: 30px;
+  height: auto !important;
+  user-select:none;
+  padding-top: 20px;
+  padding-bottom: 200px;
+}
+h2{
+  font-family: 'Open-Sans', sans-serif;
+  background-image: url(https://64.media.tumblr.com/5d7ab997c9daa879a320f9ef21e895b7/tumblr_ooeddrvOJE1uzwgsuo1_400.gif);
+  text-transform: none;
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 44pt;
+  text-align:left;
+  animation: fadeIn 2s;
+}
+h3{
+  font-family: 'Open-Sans', sans-serif;
+  background-image: url(https://64.media.tumblr.com/5d7ab997c9daa879a320f9ef21e895b7/tumblr_ooeddrvOJE1uzwgsuo1_400.gif);
+  text-transform: none;
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 30pt;
+  text-align:left;
+  animation: fadeIn 2s;
+}
+p{
+  font-size: 16pt;
+  color: white;
+  animation: fadeIn 2s;
+  font-family: 'Open-Sans', sans-serif;
+}
+#ext{
+  font-size: 16pt;
+  padding-left: 0px;
+}
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.gallery img{
+  vertical-align: top;
+  width: auto;
+  height: 200px;
+  filter: grayscale(100%);
+  padding: 7px;
+  transition: all 1s;
+  border-radius: 3%;
+  border: 2px solid #ddd;
+}
+.gallery img:hover{
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #b79cbf #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: silver;
+  border-radius: 10px;
+}
