@@ -40,15 +40,15 @@ const dloader = new DRACOLoader();
 dloader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.5/');
 dloader.setDecoderConfig({type: 'js'});
 gltfloader.setDRACOLoader(dloader);
-const disp = textureloader.load('/heightmaps/heightmap.jpg');
+const disp = textureloader.load('assets/heightmaps/heightmap.jpg');
 
 // Matcap textures used on model, torus, ground plane
-const gold = textureloader.load('/matcaps/gold.jpg');
-const silv = textureloader.load('/matcaps/silv.jpg');
-const rainbow = textureloader.load('/matcaps/rainbow.jpg');
-const silvgreen = textureloader.load('/matcaps/silvgreen.jpg');
-const obsidian = textureloader.load('/matcaps/obsidian.jpg');
-const blue = textureloader.load('/matcaps/blue.jpg');
+const gold = textureloader.load('assets/matcaps/gold.jpg');
+const silv = textureloader.load('assets/matcaps/silv.jpg');
+const rainbow = textureloader.load('assets/matcaps/rainbow.jpg');
+const silvgreen = textureloader.load('assets/matcaps/silvgreen.jpg');
+const obsidian = textureloader.load('assets/matcaps/obsidian.jpg');
+const blue = textureloader.load('assets/matcaps/blue.jpg');
 
 // Vertex shader uniforms
 const uniforms = {
@@ -105,7 +105,7 @@ const groundMesh = new THREE.Mesh(groundGeo, material);
 scene.add(groundMesh);
 groundMesh.rotateX(300);
 groundMesh.position.set(-3, 0,0);
-groundMesh.name = 'groundmesh';
+
 
 // Colorful ground plane to mimic flood basin
 const colorgeo = new THREE.PlaneGeometry(2,2, 5, 5);
@@ -123,7 +123,7 @@ colormesh.position.set(-3, -.2, 0);
 let model;
 const modelmaterial = new THREE.MeshMatcapMaterial();
 modelmaterial.matcap = obsidian;
-gltfloader.load('/assets/wave.glb', function(gltf){
+gltfloader.load('/assets/models/wave.glb', function(gltf){
   gltf.scene.scale.set(1, 1, 1);
   model = gltf.scene;
   model.traverse((o) => {
@@ -141,7 +141,7 @@ function ( error ) {
 const dronematerial = new THREE.MeshMatcapMaterial();
 dronematerial.matcap = gold;
 let drone;
-gltfloader.load('/assets/dji.glb', function(gltf){
+gltfloader.load('assets/models/dji.glb', function(gltf){
   gltf.scene.scale.set(.3, .3, .3);
   drone = gltf.scene;
   drone.position.set(-.25,.55,0);
@@ -158,7 +158,7 @@ function ( error ) {
 const treematerial = new THREE.MeshMatcapMaterial();
 treematerial.matcap = obsidian;
 let tree;
-gltfloader.load('/assets/tree.glb', function(gltf){
+gltfloader.load('assets/models/tree.glb', function(gltf){
   gltf.scene.scale.set(.20, .20, .20);
   tree = gltf.scene;
   tree.position.set(0,0,0);
