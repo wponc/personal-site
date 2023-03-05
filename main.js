@@ -2,8 +2,8 @@ import './style.css'
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import {DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader';
 import {RenderPass} from 'three/examples/jsm/postprocessing/RenderPass';
-import {EffectComposer} from 'three/examples/jsm/postprocessing/EffectComposer';
 import { TextureLoader } from 'three';
 import { GUI } from 'dat.gui'
 
@@ -36,6 +36,10 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 const manager = new THREE.LoadingManager();
 const textureloader = new THREE.TextureLoader(manager);
 const gltfloader = new GLTFLoader();
+const dloader = new DRACOLoader();
+dloader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.5/');
+dloader.setDecoderConfig({type: 'js'});
+gltfloader.setDRACOLoader(dloader);
 const disp = textureloader.load('/heightmaps/heightmap.jpg');
 
 // Matcap textures used on model, torus, ground plane
@@ -100,17 +104,18 @@ const material = new THREE.MeshStandardMaterial({
 const groundMesh = new THREE.Mesh(groundGeo, material);
 scene.add(groundMesh);
 groundMesh.rotateX(300);
-groundMesh.position.set(-3, 0,0)
-
+groundMesh.position.set(-3, 0,0);
+groundMesh.name = 'groundmesh';
 
 // Colorful ground plane to mimic flood basin
 const colorgeo = new THREE.PlaneGeometry(2,2, 5, 5);
-const colormaterial = new THREE.MeshMatcapMaterial();
+const colormaterial = new THREE.MeshMatcapMaterial({
+  side: THREE.DoubleSide
+});
 colormaterial.matcap = gold;
 const colormesh = new THREE.Mesh(colorgeo, colormaterial);
 scene.add(colormesh);
 colormesh.rotateX(300);
-
 colormesh.position.set(-3, -.2, 0);
 
 
@@ -118,7 +123,7 @@ colormesh.position.set(-3, -.2, 0);
 let model;
 const modelmaterial = new THREE.MeshMatcapMaterial();
 modelmaterial.matcap = obsidian;
-gltfloader.load('/assets/wave4.glb', function(gltf){
+gltfloader.load('/assets/wave.glb', function(gltf){
   gltf.scene.scale.set(1, 1, 1);
   model = gltf.scene;
   model.traverse((o) => {
@@ -136,7 +141,7 @@ function ( error ) {
 const dronematerial = new THREE.MeshMatcapMaterial();
 dronematerial.matcap = gold;
 let drone;
-gltfloader.load('/assets/drone.glb', function(gltf){
+gltfloader.load('/assets/dji.glb', function(gltf){
   gltf.scene.scale.set(.3, .3, .3);
   drone = gltf.scene;
   drone.position.set(-.25,.55,0);
@@ -151,9 +156,9 @@ function ( error ) {
 
 // Trees 3D model, adding silver matcap for the bone-like appearance
 const treematerial = new THREE.MeshMatcapMaterial();
-treematerial.matcap = silv;
+treematerial.matcap = obsidian;
 let tree;
-gltfloader.load('/assets/trees.glb', function(gltf){
+gltfloader.load('/assets/tree.glb', function(gltf){
   gltf.scene.scale.set(.20, .20, .20);
   tree = gltf.scene;
   tree.position.set(0,0,0);
@@ -171,7 +176,8 @@ function ( error ) {
 // Grid & axes helpers in case we need them
 const axeshelper = new THREE.AxesHelper();
 const gridhelper = new THREE.GridHelper()
-scene.add(axeshelper,gridhelper);
+//scene.add(axeshelper,gridhelper);
+
 
 
 // Event listener to move camera up/down scene based on page progress
@@ -190,16 +196,16 @@ window.addEventListener('resize', function() {
 
 
 // GUI folder
-const gui = new GUI()
-const colorfolder = gui.addFolder('color plane')
-colorfolder.add(colormesh.rotation, 'x', 0, 10)
-colorfolder.open()
-const groundfolder = gui.addFolder('ground plane')
-groundfolder.add(groundMesh.rotation, 'x', 0,10)
-groundfolder.open()
-const cameraFolder = gui.addFolder('Camera')
-cameraFolder.add(camera.position, 'z', 0, 10)
-cameraFolder.open()
+// const gui = new GUI()
+// const colorfolder = gui.addFolder('color plane')
+// colorfolder.add(colormesh.rotation, 'x', 0, 10)
+// colorfolder.open()
+// const groundfolder = gui.addFolder('ground plane')
+// groundfolder.add(groundMesh.rotation, 'x', 0,10)
+// groundfolder.open()
+// const cameraFolder = gui.addFolder('Camera')
+// cameraFolder.add(camera.position, 'z', 0, 10)
+// cameraFolder.open()
 
 // Constants for animation loop
 let elapsed;

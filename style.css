@@ -14,7 +14,7 @@ body{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  width:50%;
+  width:50vw;
   overflow: overlay;
 }
 
@@ -61,7 +61,9 @@ a:hover{
   height: 100vh;
   user-select:none;
   animation: fadeIn 5s;
+  width: 70vw;
 }
+
 h1{
   font-family: 'Open-Sans', sans-serif;
   background-image: url(https://64.media.tumblr.com/5d7ab997c9daa879a320f9ef21e895b7/tumblr_ooeddrvOJE1uzwgsuo1_400.gif);
@@ -72,7 +74,7 @@ h1{
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size:96pt;
+  font-size:8rem;
   text-align:left;
   padding-left: 30px;
   padding-top: 50px;
@@ -94,7 +96,7 @@ h2{
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 44pt;
+  font-size: 4rem;
   text-align:left;
   animation: fadeIn 2s;
 }
@@ -126,21 +128,26 @@ p{
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+.gallery{
+  display: flex;
+  width: 12vw;
+}
 
-.gallery img{
+img{
   vertical-align: top;
-  width: auto;
-  height: 200px;
+  width: 7.5rem;
+  height: 10rem;
   filter: grayscale(100%);
   padding: 7px;
   transition: all 1s;
   border-radius: 3%;
   border: 2px solid #ddd;
 }
-.gallery img:hover{
+img:hover {
   filter: grayscale(0%);
   transform: scale(1.05);
 }
+
 
 /* ===== Scrollbar CSS ===== */
   /* Firefox */
