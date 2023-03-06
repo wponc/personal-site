@@ -18,7 +18,7 @@ body{
 }
 
 .progress-bar-container{
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -29,14 +29,14 @@ body{
   justify-content: center;
   align-items: center;
   z-index: 99;
-  height: 100vh;
+  height: 110%;
   overflow: overlay;
 }
 
 progress{
   width: 30%;
   margin-top: 0.5%;
-  height: .5%;
+  height: 5px;
   border-radius: 10px;
   -webkit-appearance: none;
   background-color: grey;
@@ -129,6 +129,7 @@ h1{
   user-select:none;
   padding-top: 20px;
   padding-bottom: 200px;
+  width: 50vw;
 
 }
 h2{
@@ -175,6 +176,7 @@ p{
 }
 
 img{
+  gap: 10vw;
   vertical-align: top;
   height: 10rem;
   filter: grayscale(100%);
