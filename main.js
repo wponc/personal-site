@@ -32,15 +32,19 @@ THREE.ColorManagement.legacyMode = false;
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
-// Loader for heightmap displacement texture
+// Manager for loading animation
 const manager = new THREE.LoadingManager();
+manager.onStart = function(url, item, total) {
+  
+}
+
 const textureloader = new THREE.TextureLoader(manager);
-const gltfloader = new GLTFLoader();
+const gltfloader = new GLTFLoader(manager);
 const dloader = new DRACOLoader();
 dloader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.5/');
 dloader.setDecoderConfig({type: 'js'});
 gltfloader.setDRACOLoader(dloader);
-const disp = textureloader.load('assets/heightmaps/heightmap.jpg');
+
 
 // Matcap textures used on model, torus, ground plane
 const gold = textureloader.load('assets/matcaps/gold.jpg');
@@ -96,6 +100,7 @@ torusmesh.rotateX(37);
 
 // Wireframe ground plane, vertices displaced by heightmap image
 const groundGeo = new THREE.PlaneBufferGeometry(2.1, 2.1,100,100);
+const disp = textureloader.load('assets/heightmaps/heightmap.jpg');
 const material = new THREE.MeshStandardMaterial({
   vertexShader: document.getElementById('vertexShader').textContent,
   wireframe:true,
