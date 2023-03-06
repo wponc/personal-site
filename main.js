@@ -34,9 +34,15 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
 // Manager for loading animation
 const manager = new THREE.LoadingManager();
-manager.onStart = function(url, item, total) {
-  
+const progressbar = document.getElementById('progress-bar')
+const progressbarcontainer = document.querySelector('.progress-bar-container');
+manager.onProgress = function(url, item, total) {
+  progressbar.value = (item / total) * 100;
 }
+manager.onLoad = function(url, item, total) {
+  progressbarcontainer.style.display = 'none'
+}
+
 
 const textureloader = new THREE.TextureLoader(manager);
 const gltfloader = new GLTFLoader(manager);
