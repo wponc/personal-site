@@ -9,7 +9,7 @@ The libraries, dev tools, and content creators that I relied on to write the sit
 
 * [Three.js](https://github.com/mrdoob/three.js/): 3D JavaScript library that was the motivtaion for the site 
 * [Vite](https://vitejs.dev/): used to bundle the project and optimize under-the-hood web dev stuff I don't understand
-* [Wael Yasmina](https://www.youtube.com/watch?v=xJAfLdUgdc4&list=PLjcjAqAnHd1EIxV4FSZIiJZvsdrBc1Xho&index=1): Three.js playlist was a massive help on all aspects of the site
+* [Wael Yasmina](https://www.youtube.com/watch?v=xJAfLdUgdc4&list=PLjcjAqAnHd1EIxV4FSZIiJZvsdrBc1Xho): Three.js playlist was a massive help on all aspects of the site
 * [Fireship](https://www.youtube.com/@Fireship): funny guy, check out his Three.js starter template 
 * [DesignCourse](https://www.youtube.com/@DesignCourse): fantastic teacher of CSS and HTML concepts
 * [Colors :)](https://64.media.tumblr.com/5d7ab997c9daa879a320f9ef21e895b7/tumblr_ooeddrvOJE1uzwgsuo1_400.gif) tumblr creator of the color gradients used on the text
