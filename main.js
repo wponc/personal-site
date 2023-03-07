@@ -92,7 +92,7 @@ const renderScene = new RenderPass(scene, camera);
 const controls = new OrbitControls(camera, renderer.domElement);
 
 // Rotating torus knot visible on page load
-const torusgeom = new THREE.TorusKnotGeometry(2,.1,300,50,4,9)
+const torusgeom = new THREE.TorusKnotGeometry(2,.1,300,20,4,9)
 const torusmat = new THREE.MeshMatcapMaterial();
 torusmat.matcap = obsidian;
 const torusmesh = new THREE.Mesh(torusgeom, torusmat);
@@ -128,14 +128,14 @@ colormesh.position.set(.85, -7.4, -1.5);
 // Man base mesh model, adding obsidian matcap cause it looks cool
 let model;
 const modelmaterial = new THREE.MeshMatcapMaterial();
-modelmaterial.matcap = silv;
+modelmaterial.matcap = obsidian;
 gltfloader.load('/assets/models/human.glb', function(gltf){
-  gltf.scene.scale.set(.25, .25, .25);
+  gltf.scene.scale.set(.3, .3, .3);
   model = gltf.scene;
   model.traverse((o) => {
     if (o.isMesh) o.material = modelmaterial;
   });
-  model.position.set(.15,-4.2,-.55);
+  model.position.set(.15,-4.2,-.7);
   scene.add(model);
 },
 function ( error ) {
@@ -162,7 +162,7 @@ function ( error ) {
 
 // Trees 3D model, adding silver matcap for the bone-like appearance
 const treematerial = new THREE.MeshMatcapMaterial();
-treematerial.matcap = silv;
+treematerial.matcap = obsidian;
 let tree;
 gltfloader.load('assets/models/tree.glb', function(gltf){
   gltf.scene.scale.set(.20, .20, .20);
@@ -177,6 +177,17 @@ gltfloader.load('assets/models/tree.glb', function(gltf){
 function ( error ) {
   console.log( 'An error happened' );
 })
+
+
+const cubegeom = new THREE.TorusKnotGeometry(2,.1,300,20,4,3)
+const cubemat = new THREE.MeshMatcapMaterial();
+cubemat.matcap = obsidian;
+const cubemesh = new THREE.Mesh(torusgeom, torusmat);
+scene.add(cubemesh);
+cubemesh.position.set(2.5,-18.5,-1);
+cubemesh.rotateZ(100);
+
+
 
 
 // Grid & axes helpers in case we need them
