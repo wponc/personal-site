@@ -56,8 +56,7 @@ gltfloader.setDRACOLoader(dloader);
 
 // Matcap textures used on model, torus, ground plane
 const gold = textureloader.load('assets/matcaps/gold.jpg');
-const gold2 = textureloader.load('assets/matcaps/gold2.jpg');
-const gold3 = textureloader.load('assets/matcaps/gold3.jpg');
+const multi = textureloader.load('assets/matcaps/multi.jpg');
 const silv = textureloader.load('assets/matcaps/silv.jpg');
 const obsidian = textureloader.load('assets/matcaps/obsidian.jpg');
 
@@ -119,7 +118,7 @@ groundMesh.position.set(.8, -7.3, -1.35);
 const colorgeo = new THREE.PlaneGeometry(1.5,1.5, 1, 1);
 const colormaterial = new THREE.MeshMatcapMaterial({
 });
-colormaterial.matcap = gold;
+colormaterial.matcap = multi;
 const colormesh = new THREE.Mesh(colorgeo, colormaterial);
 scene.add(colormesh);
 colormesh.rotateX(36.75);
@@ -129,7 +128,7 @@ colormesh.position.set(.85, -7.4, -1.5);
 // Man base mesh model, adding obsidian matcap cause it looks cool
 let model;
 const modelmaterial = new THREE.MeshMatcapMaterial();
-modelmaterial.matcap = obsidian;
+modelmaterial.matcap = silv;
 gltfloader.load('/assets/models/human.glb', function(gltf){
   gltf.scene.scale.set(.25, .25, .25);
   model = gltf.scene;
@@ -163,7 +162,7 @@ function ( error ) {
 
 // Trees 3D model, adding silver matcap for the bone-like appearance
 const treematerial = new THREE.MeshMatcapMaterial();
-treematerial.matcap = obsidian;
+treematerial.matcap = silv;
 let tree;
 gltfloader.load('assets/models/tree.glb', function(gltf){
   gltf.scene.scale.set(.20, .20, .20);
