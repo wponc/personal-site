@@ -5,7 +5,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import {DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader';
 import {RenderPass} from 'three/examples/jsm/postprocessing/RenderPass';
 import { TextureLoader } from 'three';
-import { GUI } from 'dat.gui'
+import * as dat from 'dat.gui'
 
 // Dat.GUI import. Seems like I gotta do this every time. Really annoying.
 //npm install dat.gui --save-dev
@@ -101,7 +101,7 @@ torusmesh.rotateY(300);
 torusmesh.rotateX(37);
 
 // Wireframe ground plane, vertices displaced by heightmap image
-const groundGeo = new THREE.PlaneBufferGeometry(2.1, 2.1,100,100);
+const groundGeo = new THREE.PlaneBufferGeometry(1.75,1.75,100,100);
 const disp = textureloader.load('assets/heightmaps/heightmap.jpg');
 const material = new THREE.MeshStandardMaterial({
   vertexShader: document.getElementById('vertexShader').textContent,
@@ -110,33 +110,33 @@ const material = new THREE.MeshStandardMaterial({
 })
 const groundMesh = new THREE.Mesh(groundGeo, material);
 scene.add(groundMesh);
-groundMesh.rotateX(300);
-groundMesh.position.set(0, -6,0);
+groundMesh.rotateX(200);
+groundMesh.position.set(.15,-8.2,-.55);
 
 
 // Colorful ground plane to mimic flood basin
-const colorgeo = new THREE.PlaneGeometry(2,2, 5, 5);
+const colorgeo = new THREE.PlaneGeometry(1.5,1.5, 1, 1);
 const colormaterial = new THREE.MeshMatcapMaterial({
   side: THREE.DoubleSide
 });
 colormaterial.matcap = gold;
 const colormesh = new THREE.Mesh(colorgeo, colormaterial);
 scene.add(colormesh);
-colormesh.rotateX(300);
-colormesh.position.set(0, -6.2, 0);
+// colormesh.rotateX(300);
+colormesh.position.set(1, -8.2, -1);
 
 
 // Man base mesh model, adding obsidian matcap cause it looks cool
 let model;
 const modelmaterial = new THREE.MeshMatcapMaterial();
 modelmaterial.matcap = obsidian;
-gltfloader.load('/assets/models/wave.glb', function(gltf){
-  gltf.scene.scale.set(1, 1, 1);
+gltfloader.load('/assets/models/human.glb', function(gltf){
+  gltf.scene.scale.set(.25, .25, .25);
   model = gltf.scene;
   model.traverse((o) => {
     if (o.isMesh) o.material = modelmaterial;
   });
-  model.position.set(.5,-5,-1.5);
+  model.position.set(.15,-4.2,-.55);
   scene.add(model);
 },
 function ( error ) {
@@ -149,9 +149,9 @@ const dronematerial = new THREE.MeshMatcapMaterial();
 dronematerial.matcap = gold;
 let drone;
 gltfloader.load('assets/models/dji.glb', function(gltf){
-  gltf.scene.scale.set(.4, .4, .4);
+  gltf.scene.scale.set(.5,.5,.5);
   drone = gltf.scene;
-  drone.position.set(.75,-4.45,-1.75);
+  drone.position.set(.45,-4,-.85);
   scene.add(drone);
   drone.traverse((o) => {
     if (o.isMesh) o.material = dronematerial;
@@ -168,7 +168,7 @@ let tree;
 gltfloader.load('assets/models/tree.glb', function(gltf){
   gltf.scene.scale.set(.20, .20, .20);
   tree = gltf.scene;
-  tree.position.set(1.25,-5,-1.5);
+  tree.position.set(.75,-4.25,-.65);
   scene.add(tree);
   tree.rotateY(5);
   tree.traverse((o) => {
@@ -203,8 +203,13 @@ window.addEventListener('resize', function() {
 
 
 // GUI folder
-const gui = new GUI();
-
+// const gui = new dat.GUI();
+// const meshfolder = gui.addFolder('colormesh');
+// meshfolder.add(colormesh.rotation, 'x', -100, 100, 1).name("X Rotation");
+// meshfolder.add(colormesh.position, 'x', -10, 10, .01).name("X position")
+// meshfolder.add(colormesh.position, 'y', -10, 10, .01).name("y position")
+// meshfolder.add(colormesh.position, 'z', -10, 10, .01).name("z position")
+// meshfolder.open()
 // Constants for animation loop
 let elapsed;
 let dronespeed;
