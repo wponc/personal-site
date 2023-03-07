@@ -11,6 +11,8 @@ import * as dat from 'dat.gui'
 //npm install dat.gui --save-dev
 //npm install @types/dat.gui --save-dev
 
+const white = new THREE.Color();
+
 // Clock for stepping through animation loop 
 const clock = new THREE.Clock();
 
@@ -54,11 +56,11 @@ gltfloader.setDRACOLoader(dloader);
 
 // Matcap textures used on model, torus, ground plane
 const gold = textureloader.load('assets/matcaps/gold.jpg');
+const gold2 = textureloader.load('assets/matcaps/gold2.jpg');
+const gold3 = textureloader.load('assets/matcaps/gold3.jpg');
 const silv = textureloader.load('assets/matcaps/silv.jpg');
-const rainbow = textureloader.load('assets/matcaps/rainbow.jpg');
-const silvgreen = textureloader.load('assets/matcaps/silvgreen.jpg');
 const obsidian = textureloader.load('assets/matcaps/obsidian.jpg');
-const blue = textureloader.load('assets/matcaps/blue.jpg');
+
 
 // Vertex shader uniforms
 const uniforms = {
@@ -101,29 +103,27 @@ torusmesh.rotateY(300);
 torusmesh.rotateX(37);
 
 // Wireframe ground plane, vertices displaced by heightmap image
-const groundGeo = new THREE.PlaneBufferGeometry(1.75,1.75,100,100);
+const groundGeo = new THREE.PlaneBufferGeometry(2,2,150,150);
 const disp = textureloader.load('assets/heightmaps/heightmap.jpg');
 const material = new THREE.MeshStandardMaterial({
   vertexShader: document.getElementById('vertexShader').textContent,
   wireframe:true,
-  displacementMap: disp 
+  displacementMap: disp
 })
 const groundMesh = new THREE.Mesh(groundGeo, material);
 scene.add(groundMesh);
-groundMesh.rotateX(200);
-groundMesh.position.set(.15,-8.2,-.55);
-
+groundMesh.rotateX(36.75);
+groundMesh.position.set(.8, -7.3, -1.35);
 
 // Colorful ground plane to mimic flood basin
 const colorgeo = new THREE.PlaneGeometry(1.5,1.5, 1, 1);
 const colormaterial = new THREE.MeshMatcapMaterial({
-  side: THREE.DoubleSide
 });
 colormaterial.matcap = gold;
 const colormesh = new THREE.Mesh(colorgeo, colormaterial);
 scene.add(colormesh);
-// colormesh.rotateX(300);
-colormesh.position.set(1, -8.2, -1);
+colormesh.rotateX(36.75);
+colormesh.position.set(.85, -7.4, -1.5);
 
 
 // Man base mesh model, adding obsidian matcap cause it looks cool
@@ -151,7 +151,7 @@ let drone;
 gltfloader.load('assets/models/dji.glb', function(gltf){
   gltf.scene.scale.set(.5,.5,.5);
   drone = gltf.scene;
-  drone.position.set(.45,-4,-.85);
+  drone.position.set(.45,-4.05,-.85);
   scene.add(drone);
   drone.traverse((o) => {
     if (o.isMesh) o.material = dronematerial;
@@ -170,7 +170,7 @@ gltfloader.load('assets/models/tree.glb', function(gltf){
   tree = gltf.scene;
   tree.position.set(.75,-4.25,-.65);
   scene.add(tree);
-  tree.rotateY(5);
+  tree.rotateY(4);
   tree.traverse((o) => {
     if (o.isMesh) o.material = treematerial;
   });
@@ -218,7 +218,7 @@ let dronespeed;
 function animate(){
   requestAnimationFrame(animate);
   
-  elapsed = clock.getElapsedTime()*.45
+  elapsed = clock.getElapsedTime()*.25
   dronespeed = clock.getElapsedTime()*.25
   uniforms.u_time.value = clock.getElapsedTime();
  
@@ -226,7 +226,7 @@ function animate(){
   // colormesh.rotateZ(.001);
   // groundMesh.rotateZ(.001);
 
-  groundMesh.material.displacementScale = Math.sin(elapsed) * .5
+  groundMesh.material.displacementScale = Math.sin(elapsed) * .45
 
   // Throwing an error yet still works? Fix this pal
   drone.rotation.set(0,Math.sin(dronespeed),0)
