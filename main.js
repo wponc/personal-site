@@ -34,14 +34,14 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
 // Manager for loading animation
 const manager = new THREE.LoadingManager();
-const progressbar = document.getElementById('progress-bar')
-const progressbarcontainer = document.querySelector('.progress-bar-container');
-manager.onProgress = function(url, item, total) {
-  progressbar.value = (item / total) * 100;
-}
-manager.onLoad = function(url, item, total) {
-  progressbarcontainer.style.display = 'none'
-}
+// const progressbar = document.getElementById('progress-bar')
+// const progressbarcontainer = document.querySelector('.progress-bar-container');
+// manager.onProgress = function(url, item, total) {
+//   progressbar.value = (item / total) * 100;
+// }
+// manager.onLoad = function(url, item, total) {
+//   progressbarcontainer.style.display = 'none'
+// }
 
 
 const textureloader = new THREE.TextureLoader(manager);
@@ -83,24 +83,20 @@ const camera = new THREE.PerspectiveCamera(
 // Rendering
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.set(-5,2,2);
+camera.position.set(0,0,0);
 const renderScene = new RenderPass(scene, camera);
 
 
 // Orbit controls for pan, zoom
 const controls = new OrbitControls(camera, renderer.domElement);
 
-
-// Distance constant between objects along Y-axis 
-const distance = -5;
-
 // Rotating torus knot visible on page load
-const torusgeom = new THREE.TorusKnotGeometry(3,.1,300,50,4,9)
+const torusgeom = new THREE.TorusKnotGeometry(2,.1,300,50,4,9)
 const torusmat = new THREE.MeshMatcapMaterial();
 torusmat.matcap = obsidian;
 const torusmesh = new THREE.Mesh(torusgeom, torusmat);
 scene.add(torusmesh);
-torusmesh.position.set(3,0,3);
+torusmesh.position.set(2.5,0,-1);
 torusmesh.rotateY(300);
 torusmesh.rotateX(37);
 
@@ -115,7 +111,7 @@ const material = new THREE.MeshStandardMaterial({
 const groundMesh = new THREE.Mesh(groundGeo, material);
 scene.add(groundMesh);
 groundMesh.rotateX(300);
-groundMesh.position.set(-3, 0,0);
+groundMesh.position.set(0, -6,0);
 
 
 // Colorful ground plane to mimic flood basin
@@ -127,7 +123,7 @@ colormaterial.matcap = gold;
 const colormesh = new THREE.Mesh(colorgeo, colormaterial);
 scene.add(colormesh);
 colormesh.rotateX(300);
-colormesh.position.set(-3, -.2, 0);
+colormesh.position.set(0, -6.2, 0);
 
 
 // Man base mesh model, adding obsidian matcap cause it looks cool
@@ -140,7 +136,7 @@ gltfloader.load('/assets/models/wave.glb', function(gltf){
   model.traverse((o) => {
     if (o.isMesh) o.material = modelmaterial;
   });
-  model.position.set(-.5,0,0);
+  model.position.set(.5,-5,-1.5);
   scene.add(model);
 },
 function ( error ) {
@@ -153,9 +149,9 @@ const dronematerial = new THREE.MeshMatcapMaterial();
 dronematerial.matcap = gold;
 let drone;
 gltfloader.load('assets/models/dji.glb', function(gltf){
-  gltf.scene.scale.set(.3, .3, .3);
+  gltf.scene.scale.set(.4, .4, .4);
   drone = gltf.scene;
-  drone.position.set(-.25,.55,0);
+  drone.position.set(.75,-4.45,-1.75);
   scene.add(drone);
   drone.traverse((o) => {
     if (o.isMesh) o.material = dronematerial;
@@ -172,9 +168,9 @@ let tree;
 gltfloader.load('assets/models/tree.glb', function(gltf){
   gltf.scene.scale.set(.20, .20, .20);
   tree = gltf.scene;
-  tree.position.set(0,0,0);
+  tree.position.set(1.25,-5,-1.5);
   scene.add(tree);
-  tree.rotateY(4);
+  tree.rotateY(5);
   tree.traverse((o) => {
     if (o.isMesh) o.material = treematerial;
   });
@@ -207,16 +203,7 @@ window.addEventListener('resize', function() {
 
 
 // GUI folder
-// const gui = new GUI()
-// const colorfolder = gui.addFolder('color plane')
-// colorfolder.add(colormesh.rotation, 'x', 0, 10)
-// colorfolder.open()
-// const groundfolder = gui.addFolder('ground plane')
-// groundfolder.add(groundMesh.rotation, 'x', 0,10)
-// groundfolder.open()
-// const cameraFolder = gui.addFolder('Camera')
-// cameraFolder.add(camera.position, 'z', 0, 10)
-// cameraFolder.open()
+const gui = new GUI();
 
 // Constants for animation loop
 let elapsed;
@@ -239,8 +226,10 @@ function animate(){
   // Throwing an error yet still works? Fix this pal
   drone.rotation.set(0,Math.sin(dronespeed),0)
 
-  //camera.position.y = - scrollY / sizes.height * distance
+  camera.position.y = - scrollY / sizes.height * 3
   controls.update();
+  camera.lookAt(0.0,camera.position.y - 1, camera.position.z - 4)
+  console.log(camera.position.y)
   renderer.render(scene, camera);
 }
 

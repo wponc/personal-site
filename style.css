@@ -16,7 +16,7 @@ body{
   box-sizing: border-box;
   overflow: overlay;
 }
-
+/*
 .progress-bar-container{
   position: fixed;
   left: 50%;
@@ -62,18 +62,19 @@ label{
   font-size: 1rem;
   font-family: 'Open-Sans', sans-serif;
 }
-
+*/
 nav{
   position: sticky;
   top: 0;
   padding-left: 10px;
-  z-index: 98;
+  z-index: 99;
 }
 ul{
   display: flex;
   justify-content: left;
   box-sizing: border-box;
-  padding: 20px;
+  padding-top: .75%;
+  padding-left: 1.5%;
 }
 li {
   list-style: none;
@@ -92,20 +93,21 @@ a{
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 17pt;
+  font-size: 1.3rem;
   font-weight: bold;
   transition: all .5s ease 0s;
+  user-select:none;
 }
 a:hover{
   background-image: url(https://t3.ftcdn.net/jpg/01/91/95/30/360_F_191953033_gehQATeDoh5z6PyRDbeKyBZuS83CjMEF.jpg);
 }
-
 
 .welc{
   height: 100vh;
   user-select:none;
   animation: fadeIn 5s;
   width: 85vw;
+  background-color: red;
 }
 
 h1{
@@ -129,8 +131,8 @@ h1{
   user-select:none;
   padding-top: 20px;
   padding-bottom: 200px;
-  width: 50vw;
-
+  width: 45vw;
+  background-color: green;
 }
 h2{
   font-family: 'Open-Sans', sans-serif;
@@ -161,7 +163,7 @@ h3{
   animation: fadeIn 2s;
 }
 p{
-  font-size: 16pt;
+  font-size: 1.3rem;
   color: white;
   animation: fadeIn 2s;
   font-family: 'Open-Sans', sans-serif;
@@ -215,9 +217,3 @@ img:hover {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
-
-@keyframes fadeOut {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
