@@ -82,7 +82,7 @@ const camera = new THREE.PerspectiveCamera(
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.set(0,0,0);
-const renderScene = new RenderPass(scene, camera);
+
 
 
 // Orbit controls for pan, zoom
@@ -191,9 +191,9 @@ for (var z = 0; z < zcount; z+=1){
   for (var h=0; h<hcount; h+=1) {
     for (var v=0; v<vcount; v+=1) {
       cubemesh = new THREE.Mesh(cubegeometry,cubematerial);
-      cubemesh.position.x = (h-hcount/2) * spacing + .5;
+      cubemesh.position.x = (h-hcount/2) * spacing + .4;
       cubemesh.position.y = (v-vcount/2) * spacing - 13.75;
-      cubemesh.position.z = (z-zcount/2) * spacing - .75;
+      cubemesh.position.z = (z-zcount/2) * spacing - .6;
       grid.add(cubemesh);
     }
   }
@@ -202,12 +202,14 @@ scene.add(grid);
 
 
 
-const finaltorus = new THREE.TorusKnotGeometry(.25,.015,74,20,20,5)
+//const finaltorus = new THREE.TorusKnotGeometry(.25,.015,74,20,20,5)
+const finaltorus = new THREE.TorusKnotGeometry(.4,.02,300,20,4,9)
 const finalmat = new THREE.MeshMatcapMaterial();
 finalmat.matcap = gold;
 const finalmesh = new THREE.Mesh(finaltorus, finalmat);
 scene.add(finalmesh);
-finalmesh.position.set(.35,-17,-.3);
+finalmesh.position.set(.4,-17.25,-.4);
+finalmesh.rotateY(50);
 
 
 
@@ -246,14 +248,15 @@ function animate(){
   uniforms.u_time.value = clock.getElapsedTime();
 
   grid.traverse((o) => {
+    setTimeout(5000);
         if (o.isMesh){
-          o.rotateZ(-.001);
-          o.rotateY(.001);
+          o.rotateZ(-.0025);
+          o.rotateY(.0025);
         }
       });
   torusgeom.rotateZ(.00035);
   finalmesh.rotateZ(.00035);
-  //grid.rotateY(.1);
+  //grid.position.set(.05, Math.cos(elapsed) * .15, Math.cos(elapsed) * .15)
 
 
   groundMesh.material.displacementScale = Math.sin(elapsed) * .45

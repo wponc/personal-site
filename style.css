@@ -2,7 +2,6 @@ canvas {
   position: fixed;
   top:0;
   left:0;
-  color:transparent;
   z-index:-99;
 }
 
@@ -167,7 +166,7 @@ h3{
 }
 p{
   font-size: 1.3rem;
-  color: white;
+  color: whitesmoke;
   animation: fadeIn 2s;
   font-family: 'Open-Sans', sans-serif;
   width: 40%;
