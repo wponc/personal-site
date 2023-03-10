@@ -175,50 +175,21 @@ colormesh.position.set(.85, -7.2, -1.5);
 // })
 
 const grid = new THREE.Group();
-let pos;
 const cubesize = .25;
-let x = 0;
-const rows = 4;
-const cols = 4;
+const centerx = 1;
+const centery = -14;
+const centerz = -3;
+let cubemesh;
 
 const cubegeometry = new THREE.BoxBufferGeometry(cubesize, cubesize, cubesize);
 const cubematerial = new THREE.MeshMatcapMaterial();
 cubematerial.matcap = multi;
 
-const cubemesh = new THREE.Mesh(cubegeometry, cubematerial);
-scene.add(cubemesh);
-cubemesh.position.set(1,-14,-2);
-
-const cubemesh2 = new THREE.Mesh(cubegeometry, cubematerial);
-scene.add(cubemesh2);
-cubemesh2.position.set(1,-14,-3);
-
-const cubemesh3 = new THREE.Mesh(cubegeometry, cubematerial);
-scene.add(cubemesh3);
-cubemesh3.position.set(1,-14,-4);
-
-// class CustomSinCurve extends THREE.Curve {
-// 	constructor( scale = 1 ) {
-// 		super();
-// 		this.scale = scale;
-// 	}
-// 	getPoint( t, optionalTarget = new THREE.Vector3() ) {
-// 		const tx = t * 3;
-// 		const ty = Math.sin( 2 * Math.PI * t );
-// 		const tz = 0;
-// 		return optionalTarget.set( tx, ty, tz ).multiplyScalar( this.scale );
-// 	}
-// }
-
-// const path = new CustomSinCurve( .5 );
-// const tubegeom = new THREE.TubeGeometry(path, 100, .025, 20, false );
-// const tubemat = new THREE.MeshMatcapMaterial();
-// tubemat.matcap = gold;
-// const tubemesh = new THREE.Mesh(tubegeom,tubemat);
-// scene.add(tubemesh);
-// tubemesh.position.set(-4, -12.9, -1);
-//tubemesh.rotateY(8);
-
+for ( let i = 1; i < 10; i ++  ){
+  cubemesh = new THREE.Mesh( cubegeometry, cubematerial );
+  cubemesh.position.set(i/2, -14, -i/2);
+  scene.add( cubemesh );
+}
 
 
 
@@ -273,7 +244,7 @@ function animate(){
   uniforms.u_time.value = clock.getElapsedTime();
 
   torusgeom.rotateZ(.00035);
-  finalmesh.rotateX(-.00035);
+  finalmesh.rotateZ(.00035);
   
 
 
