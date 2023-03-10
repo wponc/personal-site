@@ -94,7 +94,7 @@ const torusmat = new THREE.MeshMatcapMaterial();
 torusmat.matcap = obsidian;
 const torusmesh = new THREE.Mesh(torusgeom, torusmat);
 scene.add(torusmesh);
-torusmesh.position.set(2,0,-1);
+torusmesh.position.set(2.5,0,-1);
 torusmesh.rotateY(300);
 torusmesh.rotateX(37);
 
@@ -174,28 +174,32 @@ colormesh.position.set(.85, -7.2, -1.5);
 //   console.log( 'An error happened' );
 // })
 
-const grid = new THREE.Group();
-const cubesize = .25;
-const centerx = 1;
-const centery = -14;
-const centerz = -3;
+const grid = new THREE.Object3D();
+const cubesize = .075;
+
 let cubemesh;
+const hcount = 3;
+const vcount = 3;
+const zcount = 3;
+const spacing = .15;
 
 const cubegeometry = new THREE.BoxBufferGeometry(cubesize, cubesize, cubesize);
 const cubematerial = new THREE.MeshMatcapMaterial();
 cubematerial.matcap = multi;
 
-for ( let i = 1; i < 10; i ++  ){
-  cubemesh = new THREE.Mesh( cubegeometry, cubematerial );
-  cubemesh.position.set(i/2, -14, -i/2);
-  scene.add( cubemesh );
+for (var z = 0; z < zcount; z+=1){
+  for (var h=0; h<hcount; h+=1) {
+    for (var v=0; v<vcount; v+=1) {
+      cubemesh = new THREE.Mesh(cubegeometry,cubematerial);
+      cubemesh.position.x = (h-hcount/2) * spacing + .5;
+      cubemesh.position.y = (v-vcount/2) * spacing - 13.75;
+      cubemesh.position.z = (z-zcount/2) * spacing - .75;
+      grid.add(cubemesh);
+    }
+  }
 }
+scene.add(grid);
 
-
-
-const light = new THREE.AmbientLight( 0xffffff, 1, 100 );
-light.position.set(1.5,-12,-.4);
-//scene.add( light );
 
 
 const finaltorus = new THREE.TorusKnotGeometry(.25,.015,74,20,20,5)
@@ -204,8 +208,6 @@ finalmat.matcap = gold;
 const finalmesh = new THREE.Mesh(finaltorus, finalmat);
 scene.add(finalmesh);
 finalmesh.position.set(.35,-17,-.3);
-//finalmesh.position.set(.35,-17,-1);
-//finalmesh.rotateY(100);
 
 
 
@@ -243,9 +245,15 @@ function animate(){
   dronespeed = clock.getElapsedTime()*.35
   uniforms.u_time.value = clock.getElapsedTime();
 
+  grid.traverse((o) => {
+        if (o.isMesh){
+          o.rotateZ(-.001);
+          o.rotateY(.001);
+        }
+      });
   torusgeom.rotateZ(.00035);
   finalmesh.rotateZ(.00035);
-  
+  //grid.rotateY(.1);
 
 
   groundMesh.material.displacementScale = Math.sin(elapsed) * .45
