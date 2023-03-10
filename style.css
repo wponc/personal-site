@@ -8,6 +8,7 @@ canvas {
 
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
 }
 
 body{
@@ -101,6 +102,9 @@ a:hover{
   background-image: url(https://t3.ftcdn.net/jpg/01/91/95/30/360_F_191953033_gehQATeDoh5z6PyRDbeKyBZuS83CjMEF.jpg);
 }
 
+.container{
+  scroll-snap-type: y mandatory
+}
 .welc{
   height: 100vh;
   user-select:none;
@@ -129,6 +133,7 @@ h1{
   user-select:none;
   padding-top: 20px;
   padding-bottom: 200px;
+  scroll-snap-align: start;
 }
 h2{
   font-family: 'Open-Sans', sans-serif;

@@ -4,12 +4,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import {DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader';
 import {RenderPass} from 'three/examples/jsm/postprocessing/RenderPass';
-import { TextureLoader } from 'three';
-import * as dat from 'dat.gui'
 
-// Dat.GUI import. Seems like I gotta do this every time. Really annoying.
-//npm install dat.gui --save-dev
-//npm install @types/dat.gui --save-dev
+
 
 const white = new THREE.Color();
 
@@ -47,11 +43,11 @@ const manager = new THREE.LoadingManager();
 
 
 const textureloader = new THREE.TextureLoader(manager);
-const gltfloader = new GLTFLoader(manager);
-const dloader = new DRACOLoader();
-dloader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.5/');
-dloader.setDecoderConfig({type: 'js'});
-gltfloader.setDRACOLoader(dloader);
+// const gltfloader = new GLTFLoader(manager);
+// const dloader = new DRACOLoader();
+// dloader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.5/');
+// dloader.setDecoderConfig({type: 'js'});
+// gltfloader.setDRACOLoader(dloader);
 
 
 // Matcap textures used on model, torus, ground plane
@@ -63,7 +59,8 @@ const obsidian = textureloader.load('assets/matcaps/obsidian.jpg');
 
 // Vertex shader uniforms
 const uniforms = {
-  u_time: {type: 'f', value: 0.0}
+  u_time: {type: 'f', value: 0.0},
+  time2: {type: 'f', value: 0.0}
 }
 
 // Size constants
@@ -97,7 +94,7 @@ const torusmat = new THREE.MeshMatcapMaterial();
 torusmat.matcap = obsidian;
 const torusmesh = new THREE.Mesh(torusgeom, torusmat);
 scene.add(torusmesh);
-torusmesh.position.set(2.5,0,-1);
+torusmesh.position.set(2,0,-1);
 torusmesh.rotateY(300);
 torusmesh.rotateX(37);
 
@@ -105,14 +102,13 @@ torusmesh.rotateX(37);
 const groundGeo = new THREE.PlaneBufferGeometry(2,2,150,150);
 const disp = textureloader.load('assets/heightmaps/heightmap.jpg');
 const material = new THREE.MeshStandardMaterial({
-  vertexShader: document.getElementById('vertexShader').textContent,
   wireframe:true,
   displacementMap: disp
 })
 const groundMesh = new THREE.Mesh(groundGeo, material);
 scene.add(groundMesh);
 groundMesh.rotateX(36.75);
-groundMesh.position.set(.8, -7.3, -1.35);
+groundMesh.position.set(.8, -7.1, -1.35);
 
 // Colorful ground plane to mimic flood basin
 const colorgeo = new THREE.PlaneGeometry(1.5,1.5, 1, 1);
@@ -122,70 +118,123 @@ colormaterial.matcap = multi;
 const colormesh = new THREE.Mesh(colorgeo, colormaterial);
 scene.add(colormesh);
 colormesh.rotateX(36.75);
-colormesh.position.set(.85, -7.4, -1.5);
+colormesh.position.set(.85, -7.2, -1.5);
 
 
 // Man base mesh model, adding obsidian matcap cause it looks cool
-let model;
-const modelmaterial = new THREE.MeshMatcapMaterial();
-modelmaterial.matcap = obsidian;
-gltfloader.load('/assets/models/human.glb', function(gltf){
-  gltf.scene.scale.set(.3, .3, .3);
-  model = gltf.scene;
-  model.traverse((o) => {
-    if (o.isMesh) o.material = modelmaterial;
-  });
-  model.position.set(.15,-4.2,-.7);
-  scene.add(model);
-},
-function ( error ) {
-  console.log( 'An error happened' );
-})
+// let model;
+// const modelmaterial = new THREE.MeshMatcapMaterial();
+// modelmaterial.matcap = gold;
+// gltfloader.load('/assets/models/human.glb', function(gltf){
+//   gltf.scene.scale.set(.3, .3, .3);
+//   model = gltf.scene;
+//   model.traverse((o) => {
+//     if (o.isMesh) o.material = modelmaterial;
+//   });
+//   model.position.set(.15,-4.2,-.6);
+//   scene.add(model);
+// },
+// function ( error ) {
+//   console.log( 'An error happened' );
+// })
 
 
-// Drone 3D model, adding gold matcap for the shine
-const dronematerial = new THREE.MeshMatcapMaterial();
-dronematerial.matcap = gold;
-let drone;
-gltfloader.load('assets/models/dji.glb', function(gltf){
-  gltf.scene.scale.set(.5,.5,.5);
-  drone = gltf.scene;
-  drone.position.set(.45,-4.05,-.85);
-  scene.add(drone);
-  drone.traverse((o) => {
-    if (o.isMesh) o.material = dronematerial;
-  });
-},
-function ( error ) {
-  console.log( 'An error happened' );
-})
+// // Drone 3D model, adding gold matcap for the shine
+// const dronematerial = new THREE.MeshMatcapMaterial();
+// dronematerial.matcap = gold;
+// let drone;
+// gltfloader.load('assets/models/dji.glb', function(gltf){
+//   gltf.scene.scale.set(.5,.5,.5);
+//   drone = gltf.scene;
+//   drone.position.set(.4,-4.05,-.65);
+//   scene.add(drone);
+//   drone.traverse((o) => {
+//     if (o.isMesh) o.material = dronematerial;
+//   });
+// },
+// function ( error ) {
+//   console.log( 'An error happened' );
+// })
 
-// Trees 3D model, adding silver matcap for the bone-like appearance
-const treematerial = new THREE.MeshMatcapMaterial();
-treematerial.matcap = obsidian;
-let tree;
-gltfloader.load('assets/models/tree.glb', function(gltf){
-  gltf.scene.scale.set(.20, .20, .20);
-  tree = gltf.scene;
-  tree.position.set(.75,-4.25,-.65);
-  scene.add(tree);
-  tree.rotateY(4);
-  tree.traverse((o) => {
-    if (o.isMesh) o.material = treematerial;
-  });
-},
-function ( error ) {
-  console.log( 'An error happened' );
-})
+// // Trees 3D model, adding silver matcap for the bone-like appearance
+// const treematerial = new THREE.MeshMatcapMaterial();
+// treematerial.matcap = obsidian;
+// let tree;
+// gltfloader.load('assets/models/tree.glb', function(gltf){
+//   gltf.scene.scale.set(.20, .20, .20);
+//   tree = gltf.scene;
+//   tree.position.set(.75,-4.35,-.65);
+//   scene.add(tree);
+//   tree.rotateY(4);
+//   tree.traverse((o) => {
+//     if (o.isMesh) o.material = treematerial;
+//   });
+// },
+// function ( error ) {
+//   console.log( 'An error happened' );
+// })
 
+const grid = new THREE.Group();
+let pos;
+const cubesize = .25;
+let x = 0;
+const rows = 4;
+const cols = 4;
 
-const cubegeom = new THREE.TorusKnotGeometry(2,.1,300,20,4,3)
-const cubemat = new THREE.MeshMatcapMaterial();
-cubemat.matcap = obsidian;
-const cubemesh = new THREE.Mesh(torusgeom, torusmat);
+const cubegeometry = new THREE.BoxBufferGeometry(cubesize, cubesize, cubesize);
+const cubematerial = new THREE.MeshMatcapMaterial();
+cubematerial.matcap = multi;
+
+const cubemesh = new THREE.Mesh(cubegeometry, cubematerial);
 scene.add(cubemesh);
-cubemesh.position.set(2.5,-18.5,-1);
-cubemesh.rotateZ(100);
+cubemesh.position.set(1,-14,-2);
+
+const cubemesh2 = new THREE.Mesh(cubegeometry, cubematerial);
+scene.add(cubemesh2);
+cubemesh2.position.set(1,-14,-3);
+
+const cubemesh3 = new THREE.Mesh(cubegeometry, cubematerial);
+scene.add(cubemesh3);
+cubemesh3.position.set(1,-14,-4);
+
+// class CustomSinCurve extends THREE.Curve {
+// 	constructor( scale = 1 ) {
+// 		super();
+// 		this.scale = scale;
+// 	}
+// 	getPoint( t, optionalTarget = new THREE.Vector3() ) {
+// 		const tx = t * 3;
+// 		const ty = Math.sin( 2 * Math.PI * t );
+// 		const tz = 0;
+// 		return optionalTarget.set( tx, ty, tz ).multiplyScalar( this.scale );
+// 	}
+// }
+
+// const path = new CustomSinCurve( .5 );
+// const tubegeom = new THREE.TubeGeometry(path, 100, .025, 20, false );
+// const tubemat = new THREE.MeshMatcapMaterial();
+// tubemat.matcap = gold;
+// const tubemesh = new THREE.Mesh(tubegeom,tubemat);
+// scene.add(tubemesh);
+// tubemesh.position.set(-4, -12.9, -1);
+//tubemesh.rotateY(8);
+
+
+
+
+const light = new THREE.AmbientLight( 0xffffff, 1, 100 );
+light.position.set(1.5,-12,-.4);
+//scene.add( light );
+
+
+const finaltorus = new THREE.TorusKnotGeometry(.25,.015,74,20,20,5)
+const finalmat = new THREE.MeshMatcapMaterial();
+finalmat.matcap = gold;
+const finalmesh = new THREE.Mesh(finaltorus, finalmat);
+scene.add(finalmesh);
+finalmesh.position.set(.35,-17,-.3);
+//finalmesh.position.set(.35,-17,-1);
+//finalmesh.rotateY(100);
 
 
 
@@ -212,15 +261,6 @@ window.addEventListener('resize', function() {
 });
 
 
-// GUI folder
-// const gui = new dat.GUI();
-// const meshfolder = gui.addFolder('colormesh');
-// meshfolder.add(colormesh.rotation, 'x', -100, 100, 1).name("X Rotation");
-// meshfolder.add(colormesh.position, 'x', -10, 10, .01).name("X position")
-// meshfolder.add(colormesh.position, 'y', -10, 10, .01).name("y position")
-// meshfolder.add(colormesh.position, 'z', -10, 10, .01).name("z position")
-// meshfolder.open()
-// Constants for animation loop
 let elapsed;
 let dronespeed;
 
@@ -228,23 +268,25 @@ let dronespeed;
 function animate(){
   requestAnimationFrame(animate);
   
-  elapsed = clock.getElapsedTime()*.25
-  dronespeed = clock.getElapsedTime()*.25
+  elapsed = clock.getElapsedTime()*.35
+  dronespeed = clock.getElapsedTime()*.35
   uniforms.u_time.value = clock.getElapsedTime();
- 
+
   torusgeom.rotateZ(.00035);
-  // colormesh.rotateZ(.001);
-  // groundMesh.rotateZ(.001);
+  finalmesh.rotateX(-.00035);
+  finalmesh.rotateZ(.00035);
+
 
   groundMesh.material.displacementScale = Math.sin(elapsed) * .45
 
+
   // Throwing an error yet still works? Fix this pal
-  drone.rotation.set(0,Math.sin(dronespeed),0)
+  //drone.rotation.set(0,Math.sin(dronespeed),0)
 
   camera.position.y = - scrollY / sizes.height * 3
   controls.update();
   camera.lookAt(0.0,camera.position.y - 1, camera.position.z - 4)
-  console.log(camera.position.y)
+
   renderer.render(scene, camera);
 }
 
