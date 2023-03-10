@@ -274,7 +274,7 @@ function animate(){
 
   torusgeom.rotateZ(.00035);
   finalmesh.rotateX(-.00035);
-  finalmesh.rotateZ(.00035);
+  
 
 
   groundMesh.material.displacementScale = Math.sin(elapsed) * .45
