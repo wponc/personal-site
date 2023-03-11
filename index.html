@@ -29,7 +29,7 @@
   </nav>
   <div class = 'container'>
     <div class="section"><h1>welcome</h1>
-      <p style="margin-left: 40px;">I'm Will, and this is my personal site.</div>
+      <p style="padding-left: 0.5em;">I'm Will, and this is my personal site.</div>
     </div>
     <section class="section" id="objectives"><h2>career objectives</h2>
       <p> Most importantly, I’m excited at the opportunity to utilize high powered computational tools to benefit the environment 
@@ -49,7 +49,7 @@
         for some of this work is available <a href="https://github.com/wponc/SDS-Disease-Map-Research/blob/main/Poncy_Final_ASA_Poster.pdf" target="_blank" rel="noopener noreferrer" id="ext">here</a>.</p>
     </section>
     <section class="section">
-      <h3>SKTWorks LLC • Sept 2021 -</h3>
+      <h3 style="padding-top: 1rem;">SKTWorks LLC • Sept 2021 -</h3>
       <p>Over the past year I've also been very fortunate to intern as a fieldwork assistant at a family-owned land conservation firm. 
         For the role I’ve been able to travel extensively throughout the state of Virginia, conducting site visits to assess land protection 
         practices in the establishment of conservation easements. Much of this experience has involved capture of aerial imagery with UAVs, 
@@ -58,8 +58,8 @@
     </section>
     
     <section class="section" id="personal"><h2>about me</h2>
-      <p>haloes! haleskarth! I'm an FAA-licensed remote pilot pursuing a degree in environmental data science, slowly learning the basics of web design. 
-        When i'm not pretending to be busy in front of a computer or flying a drone, I enjoy cooking and playing soccer. Dogs are my favorite animal,
+      <p>haloes! haleskarth! I'm an FAA-licensed remote pilot pursuing a degree in environmental data science. In my free time I'm slowly learning the basics of web design. 
+        When I'm not pretending to be busy in front of a computer or flying a drone, I enjoy cooking and playing soccer. Dogs are my favorite animal,
         and pineapple belongs on pizza.</p>
       <div class="gallery">
         <img src="assets/images/4.webp">
@@ -77,21 +77,6 @@
     </p> 
     </section>
     
-    <script id="vertexShader" type="x-shader/x-vertex">
-      uniform float u_time;
-      void main() {
-        vec4 result;
-        result = vec4(position.x, position.y, position.z, 1.0);
-        gl_Position = (projectionMatrix * modelViewMatrix * result)*.25;
-      }
-    </script>
-    
-    <script id="fragmentShader" type="fragment">
-      uniform float u_time;
-      void main(){
-        gl_FragColor = vec4(.1,sin(u_time *.5)*.2,cos(u_time *.5)*.2,.6);
-      }
-    </script>
   </div>
   <canvas id="bg"></canvas>
   <script defer type="module" src="/main.js"></script>
