@@ -124,6 +124,7 @@ p{
   animation: fadeIn 2s;
   font-family: 'Open-Sans', sans-serif;
   width: 45vw;
+  animation: 2s anim-lineUp ease-out;
 }
 #ext{
   font-size: 16pt;
@@ -138,7 +139,7 @@ p{
 img{
   gap: 10vw;
   vertical-align: top;
-  height: 10rem;
+  height: 12rem;
   filter: grayscale(100%);
   padding: 7px;
   transition: all 1s;

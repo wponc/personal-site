@@ -81,12 +81,6 @@ torusmesh.position.set(2.5,0,-1);
 torusmesh.rotateY(300);
 torusmesh.rotateX(37);
 
-// Grid & axes helpers in case we need them
-const axeshelper = new THREE.AxesHelper();
-const gridhelper = new THREE.GridHelper()
-//scene.add(axeshelper,gridhelper);
-
-
 // Event listener for window resize
 window.addEventListener( 'resize', onWindowResize, false );
 function onWindowResize(){
@@ -102,17 +96,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 window.onbeforeunload = function(e) {
   localStorage.setItem('scrollpos', window.scrollY);
 };
-
-let scrollY = window.scrollY
-let currentSection = 0
-window.addEventListener('scroll', () =>
-{
-    scrollY = window.scrollY
-
-    const newSection = scrollY / sizes.height
-    
-    console.log(newSection)
-})
 
 
 
