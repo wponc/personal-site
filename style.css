@@ -116,7 +116,6 @@ h3{
   font-size: 30pt;
   text-align:left;
   animation: fadeIn 2s;
-  width: 55vw;
 
 }
 p{
@@ -124,7 +123,7 @@ p{
   color: whitesmoke;
   animation: fadeIn 2s;
   font-family: 'Open-Sans', sans-serif;
-  width: 40%;
+  width: 45vw;
 }
 #ext{
   font-size: 16pt;

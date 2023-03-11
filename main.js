@@ -53,6 +53,7 @@ const sizes = {
 }
 
 // Scene & camera creation
+const cameraGroup = new THREE.Group()
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
   75, 
@@ -60,11 +61,12 @@ const camera = new THREE.PerspectiveCamera(
   .1, 
   1000
 );
-
+scene.add(cameraGroup)
 // Rendering
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.set(0,0,0);
+cameraGroup.add(camera)
 //scene.background = new THREE.Color(0x3b4744)
 
 
@@ -101,16 +103,44 @@ window.onbeforeunload = function(e) {
   localStorage.setItem('scrollpos', window.scrollY);
 };
 
+let scrollY = window.scrollY
+let currentSection = 0
+window.addEventListener('scroll', () =>
+{
+    scrollY = window.scrollY
+
+    const newSection = scrollY / sizes.height
+    
+    console.log(newSection)
+})
 
 
-// Animation loop to rotate torus, displace ground mesh, rotate drone
+
+const cursor = {}
+cursor.x = 0
+cursor.y = 0
+window.addEventListener('mousemove', (event) =>
+{
+    cursor.x = event.clientX / sizes.width - 0.5
+    cursor.y = event.clientY / sizes.height - 0.5
+
+    console.log(cursor)
+})
+
+// Animation loop to rotate torus
+let previousTime = 0
 function animate(){
   requestAnimationFrame(animate);
+  const elapsedTime = clock.getElapsedTime()
+  const deltaTime = elapsedTime - previousTime
+  previousTime = elapsedTime
+  torusgeom.rotateZ(.0005);
   renderer.render(scene, camera);
-  elapsed = clock.getElapsedTime()*.35
-  dronespeed = clock.getElapsedTime()*.35
-  uniforms.u_time.value = clock.getElapsedTime();
-  torusgeom.rotateZ(.00035);
+  const parallaxX = cursor.x * .1;
+  const parallaxY = -cursor.y * .1;
+
+  cameraGroup.position.x += (parallaxX - cameraGroup.position.x) * 5 * deltaTime
+  cameraGroup.position.y += (parallaxY - cameraGroup.position.y) * 5 * deltaTime
 }
 
 animate();
