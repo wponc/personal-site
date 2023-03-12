@@ -12,3 +12,4 @@ The libraries, dev tools, and content creators that I relied on to write the sit
 * [Fireship](https://www.youtube.com/@Fireship): funny guy, check out his Three.js starter template 
 * [DesignCourse](https://www.youtube.com/@DesignCourse): fantastic teacher of CSS and HTML concepts
 * [Colors :)](https://colormush.tumblr.com/) tumblr creator of the color gradients used on the text
+* [Gold matcap](https://github.com/sobotka/blender/blob/v2.79/release/datafiles/matcaps/mc20.jpg): texture used on torus knot
