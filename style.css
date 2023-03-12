@@ -2,7 +2,7 @@ canvas {
   position: fixed;
   top:0;
   left:0;
-  z-index:-99;
+  z-index:-99;  
 }
 
 html {
@@ -16,6 +16,10 @@ body{
   box-sizing: border-box;
   overflow: overlay;
   padding-left: 1em;
+  animation: fadeIn ease 2s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  z-index:99;
 }
 
 nav{
@@ -23,7 +27,7 @@ nav{
   top: 0;
   padding-left: .5em;
   padding-top: .05em;
-  z-index: 99;
+  z-index: 98;
 }
 ul{
   display: flex;
@@ -88,7 +92,15 @@ h1{
   padding-top: 20px;
   padding-bottom: 200px;
   scroll-snap-align: start;
+  opacity: 0;
 }
+
+.section.show{
+  animation: fadeIn 1.5s ease-in-out;
+  opacity: 1;
+}
+
+
 h2{
   font-family: 'Open-Sans', sans-serif;
   background-image: url(https://64.media.tumblr.com/5d7ab997c9daa879a320f9ef21e895b7/tumblr_ooeddrvOJE1uzwgsuo1_400.gif);
