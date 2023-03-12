@@ -1,6 +1,6 @@
 # Hi there!
 
-This is my first attempt at web development. I’ve been really interested in the capabilities of Three.js in web graphics, so I tried my hand at setting up a beginner's webpage. I tried to include what I could wrap my head around: scene creation and animated geometries. Definitely going to redesign the site significantly over the next few months as I start to understand fragment shaders and graphics rendering more.
+This is my first attempt at web development. I’ve been really interested in the capabilities of Three.js in web graphics, so I tried my hand at setting up a beginner's webpage. I tried to include what I could wrap my head around: scene creation and animated geometries. Definitely going to redesign the site significantly over the next few months as I start to understand fragment shaders and graphics rendering more. Hopefully by then I'll have something halway decent.
 
 ### Resources Used
 
