@@ -1,5 +1,6 @@
 import './style.css'
 import * as THREE from 'three';
+import goldurl from './assets/matcaps/gold.jpg';
 
 const sections = document.querySelectorAll('.section')
 const observer = new IntersectionObserver(entries => {
@@ -45,10 +46,7 @@ const textureloader = new THREE.TextureLoader(manager);
 
 
 // Matcap textures used on model, torus, ground plane
-const gold = textureloader.load('assets/matcaps/gold.jpg');
-const multi = textureloader.load('assets/matcaps/multi.jpg');
-const silv = textureloader.load('assets/matcaps/silv.jpg');
-const obsidian = textureloader.load('assets/matcaps/obsidian.jpg');
+const gold = textureloader.load(goldurl);
 
 // Scene & camera creation
 const cameraGroup = new THREE.Group()
